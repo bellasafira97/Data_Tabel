@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PERTEMUAN KE 14</title>
+</head>
+<style>
+        table {
+            width: auto;
+            border-collapse: collapse;
+            border: 2px solid black;
+        }
+        th,td {
+            height: 60px;
+            border: 2px solid black;
+            border-collapse: collapse;
+            size: 200px;
+            text-align: center;
+            
+        }
+        #thead{
+            background-color: rgb(253, 224, 213);
+            height: auto;
+            border: 2px solid black;
+            size: 200px;
+        }
+        div input{
+            width: 300px;
+            height: 26px;
+            font-family: "Arial Black", Gadget, sans-serif;
+            border: 1px dashed lightsalmon;
+            text-align: center;
+            padding-bottom: 10px;
+            }
+        div input:hover {
+            width: 300px;
+            height: 26px;
+            font-family: "Arial Black", Gadget, sans-serif;
+            border: 1px double lightsalmon;
+            background-color: bisque;
+            }
+        
+        button{
+            text-align: center;
+            background-color:lightsalmon; 
+            padding: 5px 7px; 
+            font-family: "Arial Black", Gadget, sans-serif;
+            border: 1px solid lightsalmon;
+            cursor: pointer;
+            position: relative;
+        }
+        button:hover{
+            text-align: center;
+            background-color: bisque; 
+            padding: 5px 7px;
+            font-family: "Arial Black", Gadget, sans-serif; 
+            font-size: 20px; 
+            width: 100px;
+            height: auto;
+            position: relative;
+        }
+</style>
+<body>
+<center>
+    <div>
+        <input id="nama1" type="text" placeholder="Nama Kamu ..."><br>
+        <input id="usia1" type="date"><br>
+        <input id="kota1" type="text" placeholder="Kota Kamu ..."><br><br>
+        <button id="simpan" onclick="data(), clear()">SUBMIT</button><br><br>
+        <button onclick="ascnama()">NAMA ↑</button>
+        <button onclick="descnama()">NAMA ↓</button>
+        <button onclick="ascusia()">USIA ↑</button><br><br>
+        <button onclick="descusia()">USIA ↓</button>
+        <button onclick="asckota()">KOTA ↑</button>
+        <button onclick="desckota()">KOTA ↓</button>
+        
+    </div>
+    <table>
+        <thead id="thead"></thead>
+        <tbody id="tbody"></tbody>
+    </table>
+    <script>
+        var users = [];
+        function data(){
+            document.getElementById("tbody").innerHTML =''
+            
+            var birthdate = new Date(document.getElementById('usia1').value);
+            var today = new Date();
+            var diff = today-birthdate; // This is the difference in milliseconds
+            var age = Math.floor(diff/31557600000); // Divide by 1000*60*60*24*365.25
+            var pensiun = age - 55;
+            
+            var zod_signs = ["Capricorn" , "Aquarius", "Pisces", "Aries",
+            "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio",
+            "Sagittarius"];
+            var day = birthdate.getDate();
+            var month = birthdate.getMonth();
+            var zodiacSign = "";
+            switch(month)
+            {
+                case 0: {//January
+                        if(day < 20)
+                            zodiacSign = zod_signs[0];
+                        else
+                            zodiacSign = zod_signs[1];
+                        }break;
+                case 1: {//February
+                        if(day < 19)
+                            zodiacSign = zod_signs[1];
+                        else
+                            zodiacSign = zod_signs[2];
+                        }break;
+                case 2: {//March
+                        if(day < 21)
+                            zodiacSign = zod_signs[2];
+                        else
+                            zodiacSign = zod_signs[3];
+                        }break;
+                case 3: {//April
+                        if(day < 20)
+                            zodiacSign = zod_signs[3];
+                        else
+                            zodiacSign = zod_signs[4];
+                        }break;
+                case 4: {//May
+                        if(day < 21)
+                            zodiacSign = zod_signs[4];
+                        else
+                            zodiacSign = zod_signs[5];
+                        }break;
+                case 5: {//June
+                        if(day < 21)
+                            zodiacSign = zod_signs[5];
+                        else
+                            zodiacSign = zod_signs[6];
+                        }break;
+                case 6: {//July
+                        if(day < 23)
+                            zodiacSign = zod_signs[6];
+                        else
+                            zodiacSign = zod_signs[7];
+                        }break;
+                case 7: {//August
+                        if(day < 23)
+                            zodiacSign = zod_signs[7];
+                        else
+                            zodiacSign = zod_signs[8];
+                        }break;
+                case 8: {//September
+                        if(day < 23)
+                            zodiacSign = zod_signs[8];
+                        else
+                            zodiacSign = zod_signs[9];
+                        }break;
+                case 9: {//October
+                        if(day < 23)
+                            zodiacSign = zod_signs[9];
+                        else
+                            zodiacSign = zod_signs[10];
+                        }break;
+                case 10: {//November
+                        if(day < 22)
+                            zodiacSign = zod_signs[10];
+                        else
+                            zodiacSign = zod_signs[11];
+                        }break;
+                case 11: {//December
+                        if(day < 22)
+                            zodiacSign = zod_signs[11];
+                        else
+                            zodiacSign = zod_signs[0];
+                        }break;
+            }
+            var dataUser = {
+                nama : document.getElementById('nama1').value,
+                usia : document.getElementById('usia1').value,
+                kota : document.getElementById('kota1').value,
+                age : age,
+                zodiacSign : zodiacSign,
+                pensiun : pensiun
+            }
+            document.getElementById("thead").innerHTML =
+            '<tr><th rowspan = "2">Nama</th><th colspan="3">Tanggal Lahir</th><th rowspan = "2">Usia</th><th rowspan = "2">Zodiak</th><th rowspan = "2">Pensiun</th><th rowspan = "2">Kota</th><th rowspan = "2">Hapus</th></tr><tr><th>tanggal</th><th>bulan</th><th>tahun</th></tr>';
+            
+            users.push(dataUser)
+            for(var i=0; i<users.length; i++){
+                document.getElementById("tbody").innerHTML += '<tr><td>'+users[i].nama+'</td><td>'+users[i].usia.slice(8,10)+'</td><td>'+users[i].usia.slice(5,7)+'</td><td>'
+                    +users[i].usia.slice(0,4)+'</td><td>'+users[i].age+' tahun'+'</td><td>'+users[i].zodiacSign+'</td><td>'+users[i].pensiun+'</td><td>'+users[i].kota+'</td><td><button id="hapus" onclick="hapus(this.value)">HAPUS</button></td></tr>';
+           console.log('<tr><td>'+users[i].nama+'</td><td>'+users[i].usia.slice(8,10)+'</td><td>'+users[i].usia.slice(5,7)+'</td><td>'
+                    +users[i].usia.slice(0,4)+'</td><td>'+users[i].age+'</td><td>'+zodiacSign+'</td><td>'+pensiun+'</td><td>'+users[i].kota+'</td></tr>')
+            } 
+            clear();
+        }
+
+        function clear(){
+            document.getElementById("nama1").value =""
+            document.getElementById("usia1").value =""
+            document.getElementById("kota1").value =""
+        }
+
+        function ascnama(){
+            document.getElementById("tbody").innerHTML = ""
+            for(var i=0; i<users.length; i++){
+            users.sort(function(a,b){
+                if(a.nama == b.nama){
+                    return 0;
+                } else if(a.nama < b.nama){
+                    return -1;
+                }else{
+                    return 1;
+                }
+            });
+            document.getElementById("tbody").innerHTML += '<tr><td>'+users[i].nama+'</td><td>'+users[i].usia.slice(8,10)+'</td><td>'+users[i].usia.slice(5,7)+'</td><td>'
+                    +users[i].usia.slice(0,4)+'</td><td>'+users[i].age+' tahun'+'</td><td>'+users[i].zodiacSign+'</td><td>'+users[i].pensiun+'</td><td>'+users[i].kota+'</td><td><button onclick="hapus()">HAPUS</button></td></tr>';
+           }
+    }
+        function descnama(){
+            document.getElementById("tbody").innerHTML = ""
+            for(var i=0; i<users.length; i++){
+            users.sort(function(a,b){
+                if(a.nama == b.nama){
+                    return 0;
+                } else if(a.nama < b.nama){
+                    return -1;
+                }else{
+                    return 1;
+                }
+            });
+            users.reverse();
+            document.getElementById("tbody").innerHTML += '<tr><td>'+users[i].nama+'</td><td>'+users[i].usia.slice(8,10)+'</td><td>'+users[i].usia.slice(5,7)+'</td><td>'
+                    +users[i].usia.slice(0,4)+'</td><td>'+users[i].age+' tahun'+'</td><td>'+users[i].zodiacSign+'</td><td>'+users[i].pensiun+'</td><td>'+users[i].kota+'</td><td><button id="hapus" onclick="hapus()">HAPUS</button></td></tr>';
+           }
+    }
+    
+        function ascusia(){
+            document.getElementById("tbody").innerHTML = ""
+            for(var i=0; i<users.length; i++){
+            users.sort(function (a,b){
+                return a.age - b.age;
+            });
+            document.getElementById("tbody").innerHTML += '<tr><td>'+users[i].nama+'</td><td>'+users[i].usia.slice(8,10)+'</td><td>'+users[i].usia.slice(5,7)+'</td><td>'
+                    +users[i].usia.slice(0,4)+'</td><td>'+users[i].age+' tahun'+'</td><td>'+users[i].zodiacSign+'</td><td>'+users[i].pensiun+'</td><td>'+users[i].kota+'</td><td><button onclick="hapus()">HAPUS</button></td></tr>';
+           } 
+    }
+        function descusia(){
+            document.getElementById("tbody").innerHTML = ""
+            for(var i=0; i<users.length; i++){
+            users.sort(function (a,b){
+                return b.age - a.age;
+            });
+            document.getElementById("tbody").innerHTML += '<tr><td>'+users[i].nama+'</td><td>'+users[i].usia.slice(8,10)+'</td><td>'+users[i].usia.slice(5,7)+'</td><td>'
+                    +users[i].usia.slice(0,4)+'</td><td>'+users[i].age+' tahun'+'</td><td>'+users[i].zodiacSign+'</td><td>'+users[i].pensiun+'</td><td>'+users[i].kota+'</td><td><button onclick="hapus()">HAPUS</button></td></tr>';
+           } 
+    }
+        function asckota(){
+            document.getElementById("tbody").innerHTML = ""
+            for(var i=0; i<users.length; i++){
+            users.sort(function(a,b){
+                if(a.kota == b.kota){
+                    return 0;
+                } else if(a.kota < b.kota){
+                    return -1;
+                }else{
+                    return 1;
+                }
+            });
+            document.getElementById("tbody").innerHTML += '<tr><td>'+users[i].nama+'</td><td>'+users[i].usia.slice(8,10)+'</td><td>'+users[i].usia.slice(5,7)+'</td><td>'
+                    +users[i].usia.slice(0,4)+'</td><td>'+users[i].age+' tahun'+'</td><td>'+users[i].zodiacSign+'</td><td>'+users[i].pensiun+'</td><td>'+users[i].kota+'</td><td><button onclick="hapus()">HAPUS</button></td></tr>';
+           }
+    }
+
+    function desckota(){
+            document.getElementById("tbody").innerHTML = ""
+            for(var i=0; i<users.length; i++){
+            users.sort(function(a,b){
+                if(a.kota == b.kota){
+                    return 0;
+                } else if(a.kota < b.kota){
+                    return -1;
+                }else{
+                    return 1;
+                }
+            });
+            users.reverse();
+            document.getElementById("tbody").innerHTML += '<tr><td>'+users[i].nama+'</td><td>'+users[i].usia.slice(8,10)+'</td><td>'+users[i].usia.slice(5,7)+'</td><td>'
+                    +users[i].usia.slice(0,4)+'</td><td>'+users[i].age+' tahun'+'</td><td>'+users[i].zodiacSign+'</td><td>'+users[i].pensiun+'</td><td>'+users[i].kota+'</td><td><button onclick="hapus()">HAPUS</button></td></tr>';
+           }
+    }
+    function hapus(){
+            document.getElementById('tbody').deleteRow(hapus)
+}
+    </script>
+</center>
+</body>
+</html>
